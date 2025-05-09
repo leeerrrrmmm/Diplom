@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:diplom/data/models/wiki_model.dart';
+import 'package:diplom/data/models/wiki/wiki_model.dart';
 import 'package:http/http.dart' as http;
 
 class WikiRemoteDataSource {

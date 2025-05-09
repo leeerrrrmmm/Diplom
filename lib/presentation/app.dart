@@ -1,4 +1,4 @@
-import 'package:diplom/presentation/main/main_screen.dart';
+import 'package:diplom/presentation/bottom_nav_bar/custom_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
@@ -6,6 +6,9 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: WikiPage());
+    return MaterialApp(
+      home: CustomBottomNavBar(),
+      debugShowCheckedModeBanner: false,
+    );
   }
 }

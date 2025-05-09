@@ -1,4 +1,4 @@
-import 'package:diplom/domain/entity/wiki_entity.dart';
+import 'package:diplom/domain/entity/wiki/wiki_entity.dart';
 
 class WikiSummaryModel extends WikiSummary {
   WikiSummaryModel({

@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:diplom/domain/entity/wiki_entity.dart';
+import 'package:diplom/domain/entity/wiki/wiki_entity.dart';
 import 'package:diplom/domain/usecases/wiki/wiki_uses_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';

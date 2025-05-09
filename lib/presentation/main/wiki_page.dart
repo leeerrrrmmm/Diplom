@@ -22,9 +22,17 @@ class _WikiPageState extends State<WikiPage> {
           children: [
             TextField(
               controller: _controller,
-              decoration: InputDecoration(hintText: "Enter a term..."),
+              decoration: InputDecoration(
+                alignLabelWithHint: true,
+                hintText: "Enter a term...",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+              ),
               onSubmitted: (value) {
-                context.read<WikiBloc>().add(FetchWiki(term: value));
+                value.isNotEmpty
+                    ? context.read<WikiBloc>().add(FetchWiki(term: value))
+                    : null;
               },
             ),
             const SizedBox(height: 20),
