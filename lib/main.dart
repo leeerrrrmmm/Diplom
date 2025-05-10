@@ -1,20 +1,26 @@
 import 'package:diplom/data/data_source/data_muse_data_source/data_muse_data_source.dart';
 import 'package:diplom/data/data_source/open_lib/remote_lib_data_source.dart';
 import 'package:diplom/data/data_source/wiki/remote_data_source.dart';
+import 'package:diplom/data/data_source/youtube/youtube_data_source.dart';
 import 'package:diplom/data/repo/data_muse/data_muse_repo_impl.dart';
 import 'package:diplom/data/repo/open_lib/open_lib_repo_impl.dart';
 import 'package:diplom/data/repo/wiki_impl/wiki_repo_impl.dart';
+import 'package:diplom/data/repo/youtube/youtube_impl.dart';
 import 'package:diplom/domain/usecases/data_muse/data_muse_use_cases.dart';
 import 'package:diplom/domain/usecases/open_lib_use_cases/open_lib_user_cases.dart';
 import 'package:diplom/domain/usecases/wiki/wiki_uses_case.dart';
+import 'package:diplom/domain/usecases/youtube/youtube_use_cases.dart';
 import 'package:diplom/presentation/app.dart';
 import 'package:diplom/presentation/bloc/data_muse_bloc/data_muse_bloc.dart';
 import 'package:diplom/presentation/bloc/open_lib_bloc/open_lib_bloc.dart';
 import 'package:diplom/presentation/bloc/wiki_bloc/wiki_bloc.dart';
+import 'package:diplom/presentation/bloc/youtube_bloc/youtube_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
+  await dotenv.load();
   // wiki
   final remoteDataSource = WikiRemoteDataSource();
   final repository = WikiRepositoryImpl(remoteDataSource);
@@ -121,12 +127,17 @@ void main() async {
   ///
   /// Документация: https://www.datamuse.com/api/
 
+  final remoteYoutubeSource = YoutubeDataSource();
+  final youtubeRepo = YoutubeRepositoryImpl(remoteYoutubeSource);
+  final getRes = YoutubeUseCases(youtubeRepo);
+
   runApp(
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => WikiBloc(getSummary)),
         BlocProvider(create: (context) => OpenLibBloc(getBookUsesCase)),
         BlocProvider(create: (context) => DataMuseBloc(getWords)),
+        BlocProvider(create: (context) => YoutubeBloc(getRes)),
       ],
       child: App(),
     ),
