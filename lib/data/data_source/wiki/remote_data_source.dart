@@ -6,11 +6,9 @@ import 'package:http/http.dart' as http;
 class WikiRemoteDataSource {
   final String _url = "https://en.wikipedia.org/api/rest_v1/page/summary";
 
-  String get url => _url;
-
   Future<WikiSummaryModel> getSummary(String term) async {
     try {
-      final res = await http.get(Uri.parse("$url/$term"));
+      final res = await http.get(Uri.parse("$_url/$term"));
 
       if (res.statusCode == 200) {
         final jsonData = json.decode(res.body);

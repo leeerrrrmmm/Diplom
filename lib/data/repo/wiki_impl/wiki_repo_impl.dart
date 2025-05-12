@@ -8,7 +8,7 @@ class WikiRepositoryImpl implements WikiRepo {
   WikiRepositoryImpl(this.remoteDataSource);
 
   @override
-  Future<WikiSummary> getSummary(String term) {
+  Future<WikiSummary> getSummary(String term) async {
     return remoteDataSource.getSummary(term);
   }
 }

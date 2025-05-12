@@ -1,4 +1,4 @@
-import 'package:diplom/presentation/bloc/open_lib_bloc/open_lib_bloc.dart';
+import 'package:diplom/presentation/service/bloc/open_lib_bloc/open_lib_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -8,7 +8,22 @@ class DataMuseRepoImpl extends DataMuseRepo {
   DataMuseRepoImpl(this.dataMuseDataSource);
 
   @override
-  Future<List<DataMuseEntity>> fetchWords(String query) {
+  Future<List<DataMuseEntity>> fetchWords(String query) async {
     return dataMuseDataSource.fetchWords(query);
+  }
+
+  @override
+  Future<List<DataMuseEntity>> fetchRhymeWords(String query) async {
+    return dataMuseDataSource.fetchRhyme(query);
+  }
+
+  @override
+  Future<List<DataMuseEntity>> fetchSynonymWords(String query) async {
+    return dataMuseDataSource.fetchSynonym(query);
+  }
+
+  @override
+  Future<List<DataMuseEntity>> fetchAntonymWords(String query) async {
+    return dataMuseDataSource.fetchAntonym(query);
   }
 }

@@ -9,4 +9,16 @@ class DataMuseUseCases {
   Future<List<DataMuseEntity>> call(String query) async {
     return reposiitory.fetchWords(query);
   }
+
+  Future<List<DataMuseEntity>> callRhyme(String query) async {
+    return reposiitory.fetchRhymeWords(query);
+  }
+
+  Future<List<DataMuseEntity>> fethSynonymWords(String query) async {
+    return reposiitory.fetchSynonymWords(query);
+  }
+
+  Future<List<DataMuseEntity>> fetchAntonymWords(String query) async {
+    return reposiitory.fetchAntonymWords(query);
+  }
 }

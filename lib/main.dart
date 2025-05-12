@@ -11,10 +11,10 @@ import 'package:diplom/domain/usecases/open_lib_use_cases/open_lib_user_cases.da
 import 'package:diplom/domain/usecases/wiki/wiki_uses_case.dart';
 import 'package:diplom/domain/usecases/youtube/youtube_use_cases.dart';
 import 'package:diplom/presentation/app.dart';
-import 'package:diplom/presentation/bloc/data_muse_bloc/data_muse_bloc.dart';
-import 'package:diplom/presentation/bloc/open_lib_bloc/open_lib_bloc.dart';
-import 'package:diplom/presentation/bloc/wiki_bloc/wiki_bloc.dart';
-import 'package:diplom/presentation/bloc/youtube_bloc/youtube_bloc.dart';
+import 'package:diplom/presentation/service/bloc/data_muse_bloc/data_muse_bloc.dart';
+import 'package:diplom/presentation/service/bloc/open_lib_bloc/open_lib_bloc.dart';
+import 'package:diplom/presentation/service/bloc/wiki_bloc/wiki_bloc.dart';
+import 'package:diplom/presentation/service/bloc/youtube_bloc/youtube_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -97,35 +97,6 @@ void main() async {
   final remoteDataMuseSource = DataMuseDataSource();
   final repo = DataMuseRepoImpl(remoteDataMuseSource);
   final getWords = DataMuseUseCases(repo);
-
-  /// TODO: Интеграция с DataMuse API 🔍
-  ///
-  /// Возможности:
-  ///
-  /// ✅ Поиск похожих слов (синонимы)
-  ///    - Пример: https://api.datamuse.com/words?ml=smart → clever, intelligent, bright...
-  ///
-  /// ✅ Поиск рифм
-  ///    - Пример: https://api.datamuse.com/words?rel_rhy=blue → true, do, shoe, you...
-  ///
-  /// ✅ Ассоциативные слова (часто встречающиеся рядом)
-  ///    - Пример: https://api.datamuse.com/words?rel_trg=fire → smoke, burn, heat, flames...
-  ///
-  /// ✅ Поиск по шаблону (начинается, заканчивается, содержит и т.д.)
-  ///    - Пример: https://api.datamuse.com/words?sp=a*e → ace, age, alive, aside...
-  ///
-  /// ✅ Комбинирование параметров
-  ///    - Пример: https://api.datamuse.com/words?ml=fast&rel_syn=quick
-  ///
-  /// План:
-  /// 1. Создать модель слов WordModel.
-  /// 2. Реализовать DataSource с методами по параметрам API.
-  /// 3. Реализовать Repository.
-  /// 4. Написать UseCase (например, GetSynonymsUseCase, GetRhymesUseCase).
-  /// 5. Реализовать BLoC/State.
-  /// 6. Добавить UI с полем ввода и отображением результатов.
-  ///
-  /// Документация: https://www.datamuse.com/api/
 
   final remoteYoutubeSource = YoutubeDataSource();
   final youtubeRepo = YoutubeRepositoryImpl(remoteYoutubeSource);

@@ -1,4 +1,4 @@
-import 'package:diplom/presentation/bloc/youtube_bloc/youtube_bloc.dart';
+import 'package:diplom/presentation/service/bloc/youtube_bloc/youtube_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
