@@ -1,4 +1,5 @@
 import 'package:diplom/domain/entity/lib/open_lib.dart';
+import 'package:diplom/generated/l10n.dart';
 import 'package:diplom/presentation/service/bloc/open_lib_bloc/open_lib_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,9 +10,10 @@ class OpenLibDeetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localString = S.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Детали книги'),
+        title: Text(localString.detail_book),
         backgroundColor: const Color(0xff9a73cb),
         foregroundColor: Colors.white,
       ),
@@ -52,7 +54,7 @@ class OpenLibDeetail extends StatelessWidget {
 
                     // Автор
                     Text(
-                      'Автор: ${curBook.author}',
+                      '${localString.author}: ${curBook.author}',
                       style: const TextStyle(
                         fontSize: 18,
                         fontStyle: FontStyle.italic,
@@ -65,7 +67,7 @@ class OpenLibDeetail extends StatelessWidget {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Описание:',
+                        localString.description,
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w600,

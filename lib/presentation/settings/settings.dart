@@ -44,7 +44,7 @@ class _SettingsState extends State<Settings> {
               horizontal: 16.0,
             ),
             child: _buildThemeTile(
-              title: 'Choose theme mode',
+              title: localString.theme,
               themeTitle: isDark ? localString.dark : localString.light,
               icon: Icons.light_mode_outlined,
               currentCode: currentCode,
@@ -81,7 +81,7 @@ Widget _buildThemeTile({
             const SizedBox(width: 8),
             Text(
               title,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
           ],
         ),

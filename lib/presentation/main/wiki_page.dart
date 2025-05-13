@@ -1,3 +1,4 @@
+import 'package:diplom/generated/l10n.dart';
 import 'package:diplom/presentation/service/bloc/wiki_bloc/wiki_bloc.dart';
 import 'package:diplom/presentation/service/common/lang/locale_provider.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class _WikiPageState extends State<WikiPage> {
 
   @override
   Widget build(BuildContext context) {
+    final localeString = S.of(context);
     final localeCode =
         Provider.of<LocaleProvider>(
           context,
@@ -58,7 +60,7 @@ class _WikiPageState extends State<WikiPage> {
                       }
                     },
                     decoration: InputDecoration(
-                      hintText: 'Введите текст',
+                      hintText: localeString.enter_text,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(16),
@@ -119,9 +121,7 @@ class _WikiPageState extends State<WikiPage> {
                     } else if (state is WikiError) {
                       return Center(child: Text(state.errorMsg));
                     }
-                    return const Center(
-                      child: Text("Введите термин для поиска"),
-                    );
+                    return Center(child: Text(localeString.term));
                   },
                 ),
               ),

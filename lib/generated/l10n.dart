@@ -60,6 +60,11 @@ class S {
     return Intl.message('Choose Language', name: 'locale', desc: '', args: []);
   }
 
+  /// `Choose theme mode`
+  String get theme {
+    return Intl.message('Choose theme mode', name: 'theme', desc: '', args: []);
+  }
+
   /// `Enter text..`
   String get enter_text {
     return Intl.message('Enter text..', name: 'enter_text', desc: '', args: []);
@@ -125,6 +130,11 @@ class S {
     return Intl.message('Description', name: 'description', desc: '', args: []);
   }
 
+  /// `Book detail`
+  String get detail_book {
+    return Intl.message('Book detail', name: 'detail_book', desc: '', args: []);
+  }
+
   /// `Choose the correct filter and add some query`
   String get choose_the_cur_filter {
     return Intl.message(
@@ -158,6 +168,11 @@ class S {
       desc: '',
       args: [],
     );
+  }
+
+  /// `Filters`
+  String get filter {
+    return Intl.message('Filters', name: 'filter', desc: '', args: []);
   }
 }
 

@@ -1,5 +1,6 @@
 {
     "locale" : "Choose Language",
+    "theme" : "Choose theme mode",
     "enter_text" : "Enter text..",
 
     "accept" : "Accept",
@@ -14,10 +15,13 @@
 
     "author" : "Author",
     "description" : "Description",
+    "detail_book" : "Book detail",
 
     "choose_the_cur_filter": "Choose the correct filter and add some query",
     "rhyme" : "Rhyme",
     "synonym" : "Synonym",
     "antonym" : "Antonym",
-    "similar_word" : "Similar words"
+    "similar_word" : "Similar words",
+    "filter" : "Filters"
+
 }

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:diplom/generated/l10n.dart';
 import 'package:diplom/presentation/detail/open_lib/open_lib_deetail.dart';
 import 'package:diplom/presentation/service/bloc/open_lib_bloc/open_lib_bloc.dart';
 import 'package:flutter/material.dart';
@@ -61,6 +62,7 @@ class _OpenLibState extends State<OpenLib> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final localeString = S.of(context);
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -96,7 +98,7 @@ class _OpenLibState extends State<OpenLib> with SingleTickerProviderStateMixin {
                       context.read<OpenLibBloc>().add(SearchBooks(query));
                     },
                     decoration: InputDecoration(
-                      hintText: 'Введите текст',
+                      hintText: localeString.enter_text,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(16),
@@ -210,7 +212,7 @@ class _OpenLibState extends State<OpenLib> with SingleTickerProviderStateMixin {
                                             ),
                                             SizedBox(height: 10),
                                             Text(
-                                              'Author: ${book.author}',
+                                              '${localeString.author}: ${book.author}',
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: 16,

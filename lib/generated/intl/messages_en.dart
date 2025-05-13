@@ -30,7 +30,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "dark": MessageLookupByLibrary.simpleMessage("Dark theme"),
     "description": MessageLookupByLibrary.simpleMessage("Description"),
+    "detail_book": MessageLookupByLibrary.simpleMessage("Book detail"),
     "enter_text": MessageLookupByLibrary.simpleMessage("Enter text.."),
+    "filter": MessageLookupByLibrary.simpleMessage("Filters"),
     "light": MessageLookupByLibrary.simpleMessage("Light Theme"),
     "locale": MessageLookupByLibrary.simpleMessage("Choose Language"),
     "rhyme": MessageLookupByLibrary.simpleMessage("Rhyme"),
@@ -42,5 +44,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "similar_word": MessageLookupByLibrary.simpleMessage("Similar words"),
     "synonym": MessageLookupByLibrary.simpleMessage("Synonym"),
     "term": MessageLookupByLibrary.simpleMessage("Enter the search term"),
+    "theme": MessageLookupByLibrary.simpleMessage("Choose theme mode"),
   };
 }

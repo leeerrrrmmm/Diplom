@@ -1,3 +1,4 @@
+import 'package:diplom/generated/l10n.dart';
 import 'package:diplom/presentation/detail/rhyme_detail/rhyme_detail.dart';
 import 'package:diplom/presentation/service/bloc/data_muse_bloc/data_muse_bloc.dart';
 import 'package:flutter/material.dart';
@@ -85,6 +86,7 @@ class _RifmaScreenState extends State<RifmaScreen>
 
   @override
   Widget build(BuildContext context) {
+    final localeString = S.of(context);
     return Scaffold(
       backgroundColor: const Color(0xffdea7db),
       body: SafeArea(
@@ -116,7 +118,7 @@ class _RifmaScreenState extends State<RifmaScreen>
                           ),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
+                              color: Colors.black.withValues(alpha: 0.1),
                               blurRadius: 8,
                               offset: const Offset(0, 9),
                             ),
@@ -125,8 +127,8 @@ class _RifmaScreenState extends State<RifmaScreen>
                         child: TextField(
                           controller: controller,
                           onSubmitted: _submit,
-                          decoration: const InputDecoration(
-                            hintText: 'Введите текст',
+                          decoration: InputDecoration(
+                            hintText: localeString.enter_text,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(16),
@@ -159,26 +161,28 @@ class _RifmaScreenState extends State<RifmaScreen>
                       ),
                     ),
                     if (!_anyFilterSelected() || controller.text.isEmpty)
-                      const Text("Выберите фильтры и введите слово"),
+                      Text(localeString.choose_the_cur_filter),
                     if (state is DataMuseLoading ||
                         state is DataMuseRhymeLoading ||
                         state is DataMuseSynonymLoading ||
                         state is DataMuseAntonymLoading)
                       const CircularProgressIndicator(),
                     if (rhymeWords.isNotEmpty && showRhyme)
-                      _buildFilterBox("Рифмы", rhymeWords),
+                      _buildFilterBox(localeString.rhyme, rhymeWords),
                     if (synonymWords.isNotEmpty && showSynonym)
-                      _buildFilterBox("Синонимы", synonymWords),
+                      _buildFilterBox(localeString.synonym, synonymWords),
                     if (antonymWords.isNotEmpty && showAntonym)
-                      _buildFilterBox("Антонимы", antonymWords),
+                      _buildFilterBox(localeString.antonym, antonymWords),
                     if (similarWords.isNotEmpty && showSimilar)
-                      _buildFilterBox("Похожие", similarWords),
+                      _buildFilterBox(localeString.similar_word, similarWords),
                   ],
                 ),
                 if (_showOverlay)
                   GestureDetector(
                     onTap: _toggleOverlay,
-                    child: Container(color: Colors.black.withOpacity(0.4)),
+                    child: Container(
+                      color: Colors.black.withValues(alpha: 0.4),
+                    ),
                   ),
                 if (_showOverlay)
                   Center(
@@ -208,8 +212,8 @@ class _RifmaScreenState extends State<RifmaScreen>
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              'Фильтры:',
+                            Text(
+                              localeString.filter,
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -217,22 +221,22 @@ class _RifmaScreenState extends State<RifmaScreen>
                             ),
                             const SizedBox(height: 20),
                             _buildCheckboxTile(
-                              "Похожие слова",
+                              localeString.similar_word,
                               showSimilar,
                               (val) => setState(() => showSimilar = val!),
                             ),
                             _buildCheckboxTile(
-                              "Рифмы",
+                              localeString.rhyme,
                               showRhyme,
                               (val) => setState(() => showRhyme = val!),
                             ),
                             _buildCheckboxTile(
-                              "Синонимы",
+                              localeString.synonym,
                               showSynonym,
                               (val) => setState(() => showSynonym = val!),
                             ),
                             _buildCheckboxTile(
-                              "Антонимы",
+                              localeString.antonym,
                               showAntonym,
                               (val) => setState(() => showAntonym = val!),
                             ),
@@ -255,8 +259,8 @@ class _RifmaScreenState extends State<RifmaScreen>
                                   _toggleOverlay();
                                   _submit(controller.text.trim());
                                 },
-                                child: const Text(
-                                  "Применить",
+                                child: Text(
+                                  localeString.accept,
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 20,

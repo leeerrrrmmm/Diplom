@@ -30,9 +30,11 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "dark": MessageLookupByLibrary.simpleMessage("Темна тема"),
     "description": MessageLookupByLibrary.simpleMessage("Опис:"),
+    "detail_book": MessageLookupByLibrary.simpleMessage("Деталі книги"),
     "enter_text": MessageLookupByLibrary.simpleMessage(
       "Введіть текст у графу...",
     ),
+    "filter": MessageLookupByLibrary.simpleMessage("Фільтри"),
     "light": MessageLookupByLibrary.simpleMessage("Світла тема"),
     "locale": MessageLookupByLibrary.simpleMessage("Оберіть мову додатку"),
     "rhyme": MessageLookupByLibrary.simpleMessage("Рифми"),
@@ -44,5 +46,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "similar_word": MessageLookupByLibrary.simpleMessage("Схожі слова"),
     "synonym": MessageLookupByLibrary.simpleMessage("Синоніми"),
     "term": MessageLookupByLibrary.simpleMessage("Введіть термін для пошуку.."),
+    "theme": MessageLookupByLibrary.simpleMessage("Оберіть тему додатку"),
   };
 }
