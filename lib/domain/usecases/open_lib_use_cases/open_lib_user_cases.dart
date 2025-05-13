@@ -6,7 +6,11 @@ class GetBooksUseCase {
 
   GetBooksUseCase(this.repository);
 
-  Future<List<OpenLibEntity>> call(String query, int page, int limit) {
+  Future<List<OpenLibEntity>> call(String query, int page, int limit) async {
     return repository.searchBooks(query, page, limit);
+  }
+
+  Future<OpenLibEntity> fetchCurrentBook(String bookKey) async {
+    return repository.fetchCurrentBook(bookKey);
   }
 }

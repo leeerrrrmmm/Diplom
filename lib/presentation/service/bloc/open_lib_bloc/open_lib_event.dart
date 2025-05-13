@@ -15,4 +15,10 @@ class SearchBooks extends OpenLibEvent {
   const SearchBooks(this.query);
 }
 
+class FetchBookDetailEvent extends OpenLibEvent {
+  final String bookKey;
+
+  const FetchBookDetailEvent(this.bookKey);
+}
+
 class LoadMoreBooks extends OpenLibEvent {}

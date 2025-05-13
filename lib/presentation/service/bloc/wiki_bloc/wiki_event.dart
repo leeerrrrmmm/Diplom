@@ -9,5 +9,6 @@ sealed class WikiEvent extends Equatable {
 
 class FetchWiki extends WikiEvent {
   final String term;
-  const FetchWiki({required this.term});
+  final String language;
+  const FetchWiki({required this.term, required this.language});
 }

@@ -15,7 +15,7 @@ class WikiBloc extends Bloc<WikiEvent, WikiState> {
     on<FetchWiki>((event, emit) async {
       emit(WikiLoading());
       try {
-        final summary = await getWikiSummary.call(event.term);
+        final summary = await getWikiSummary.call(event.term, event.language);
         emit(WikiLoaded(summary));
       } catch (e) {
         log('BLOC MODULE: fetch summary wiki error: $e');

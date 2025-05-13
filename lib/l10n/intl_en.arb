@@ -1,0 +1,23 @@
+{
+    "locale" : "Choose Language",
+    "enter_text" : "Enter text..",
+
+    "accept" : "Accept",
+    "select_lang" : "Select the Language",
+    "select_category" : "Select the category",
+    "settings" : "Settings",
+    "dark" : "Dark theme",
+    "light": "Light Theme",
+
+
+    "term": "Enter the search term",
+
+    "author" : "Author",
+    "description" : "Description",
+
+    "choose_the_cur_filter": "Choose the correct filter and add some query",
+    "rhyme" : "Rhyme",
+    "synonym" : "Synonym",
+    "antonym" : "Antonym",
+    "similar_word" : "Similar words"
+}

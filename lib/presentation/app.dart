@@ -1,7 +1,11 @@
 import 'package:diplom/data/local/theme/theme_storage.dart';
+import 'package:diplom/generated/l10n.dart';
 import 'package:diplom/presentation/bottom_nav_bar/custom_bottom_nav_bar.dart';
+import 'package:diplom/presentation/service/common/lang/locale_provider.dart';
 import 'package:diplom/presentation/service/common/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -34,6 +38,16 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
+    final localeProvider = Provider.of<LocaleProvider>(context);
+
+    if (!localeProvider.isLoaded) {
+      return const MaterialApp(
+        home: Scaffold(
+          body: Center(child: CircularProgressIndicator.adaptive()),
+        ),
+      );
+    }
+
     return ThemeProvider(
       themeMode: _themeMode,
       toggleTheme: _toggleTheme,
@@ -41,6 +55,15 @@ class _AppState extends State<App> {
         builder: (context) {
           final mode = ThemeProvider.of(context).themeMode;
           return MaterialApp(
+            locale: localeProvider.locale,
+            localizationsDelegates: [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+
+            supportedLocales: S.delegate.supportedLocales,
             debugShowCheckedModeBanner: false,
             theme: ThemeData.light(),
             darkTheme: ThemeData.dark(),

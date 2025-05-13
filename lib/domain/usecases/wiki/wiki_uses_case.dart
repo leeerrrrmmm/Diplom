@@ -6,7 +6,7 @@ class GetWikiSummary {
 
   GetWikiSummary(this.repository);
 
-  Future<WikiSummary> call(String term) {
-    return repository.getSummary(term);
+  Future<WikiSummary> call(String term, String language) {
+    return repository.getSummary(term, language);
   }
 }

@@ -1,7 +1,13 @@
 import 'package:diplom/domain/entity/lib/open_lib.dart';
 
 class OpenLibModel extends OpenLibEntity {
-  OpenLibModel({required super.title, required super.author, super.coverUrl});
+  OpenLibModel({
+    required super.title,
+    required super.author,
+    super.description,
+    required super.bookKey,
+    super.coverUrl,
+  });
 
   factory OpenLibModel.fromJson(Map<String, dynamic> json) {
     return OpenLibModel(
@@ -14,6 +20,8 @@ class OpenLibModel extends OpenLibEntity {
           json['cover_i'] != null
               ? 'https://covers.openlibrary.org/b/id/${json['cover_i']}-L.jpg'
               : null,
+      description: json['description'] ?? 'Нет ',
+      bookKey: json['key'] ?? '',
     );
   }
 }

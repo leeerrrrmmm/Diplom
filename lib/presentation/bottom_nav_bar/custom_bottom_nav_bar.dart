@@ -44,10 +44,12 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
             icon: FaIcon(FontAwesomeIcons.wikipediaW),
           ),
           BottomNavigationBarItem(
+            backgroundColor: Color(0xff9b1dba),
             label: 'Open Library',
             icon: Icon(Icons.library_books_outlined),
           ),
           BottomNavigationBarItem(
+            backgroundColor: Color(0xffba1db5),
             label: 'Open Rima',
             icon: Icon(Icons.workspaces_filled),
           ),
