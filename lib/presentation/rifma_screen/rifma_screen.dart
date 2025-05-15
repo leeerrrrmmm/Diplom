@@ -86,9 +86,27 @@ class _RifmaScreenState extends State<RifmaScreen>
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final localeString = S.of(context);
+    final backgroundColor =
+        isDark ? const Color(0xFF2a213a) : const Color(0xffdea7db);
+    final containerColor = isDark ? const Color(0xFF3a2f4c) : Colors.white;
+    final inputFillColor =
+        isDark ? const Color(0xFF5a4f70) : const Color(0xffdfd0f2);
+    final overlayBackgroundColor = Colors.black.withValues(
+      alpha: isDark ? 0.6 : 0.4,
+    );
+    final filterBoxColor = isDark ? const Color(0xFF4b4161) : Colors.white;
+    final textColor = isDark ? Colors.white : Colors.black;
+    final subtitleTextColor = isDark ? Colors.grey[400] : Colors.grey;
+    final iconColor = isDark ? Colors.deepPurple[200] : Colors.deepPurple;
+    final buttonColor =
+        isDark
+            ? const Color.fromARGB(181, 214, 58, 235)
+            : const Color.fromARGB(181, 214, 58, 235);
+
     return Scaffold(
-      backgroundColor: const Color(0xffdea7db),
+      backgroundColor: backgroundColor,
       body: SafeArea(
         child: BlocConsumer<DataMuseBloc, DataMuseState>(
           listener: (context, state) {
@@ -111,7 +129,7 @@ class _RifmaScreenState extends State<RifmaScreen>
                       padding: const EdgeInsets.only(left: 10.0, top: 10),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: containerColor,
                           borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(16),
                             bottomLeft: Radius.circular(16),
@@ -127,22 +145,26 @@ class _RifmaScreenState extends State<RifmaScreen>
                         child: TextField(
                           controller: controller,
                           onSubmitted: _submit,
+                          style: TextStyle(color: textColor),
                           decoration: InputDecoration(
                             hintText: localeString.enter_text,
+                            hintStyle: TextStyle(
+                              color: textColor.withValues(alpha: 0.6),
+                            ),
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.only(
+                              borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(16),
                                 bottomLeft: Radius.circular(16),
                               ),
                               borderSide: BorderSide.none,
                             ),
-                            contentPadding: EdgeInsets.symmetric(
+                            contentPadding: const EdgeInsets.symmetric(
                               horizontal: 16,
                               vertical: 14,
                             ),
-                            prefixIcon: Icon(Icons.search),
+                            prefixIcon: Icon(Icons.search, color: iconColor),
                             filled: true,
-                            fillColor: Color(0xffdfd0f2),
+                            fillColor: inputFillColor,
                           ),
                         ),
                       ),
@@ -153,36 +175,69 @@ class _RifmaScreenState extends State<RifmaScreen>
                         alignment: Alignment.topRight,
                         child: GestureDetector(
                           onTap: _toggleOverlay,
-                          child: const CircleAvatar(
+                          child: CircleAvatar(
                             radius: 24,
-                            child: Icon(Icons.category_rounded),
+                            backgroundColor: containerColor,
+                            child: Icon(
+                              Icons.category_rounded,
+                              color: iconColor,
+                            ),
                           ),
                         ),
                       ),
                     ),
                     if (!_anyFilterSelected() || controller.text.isEmpty)
-                      Text(localeString.choose_the_cur_filter),
+                      Text(
+                        localeString.choose_the_cur_filter,
+                        style: TextStyle(color: textColor),
+                      ),
                     if (state is DataMuseLoading ||
                         state is DataMuseRhymeLoading ||
                         state is DataMuseSynonymLoading ||
                         state is DataMuseAntonymLoading)
                       const CircularProgressIndicator(),
                     if (rhymeWords.isNotEmpty && showRhyme)
-                      _buildFilterBox(localeString.rhyme, rhymeWords),
+                      _buildFilterBox(
+                        localeString.rhyme,
+                        rhymeWords,
+                        filterBoxColor,
+                        textColor,
+                        subtitleTextColor,
+                        iconColor,
+                      ),
                     if (synonymWords.isNotEmpty && showSynonym)
-                      _buildFilterBox(localeString.synonym, synonymWords),
+                      _buildFilterBox(
+                        localeString.synonym,
+                        synonymWords,
+                        filterBoxColor,
+                        textColor,
+                        subtitleTextColor,
+                        iconColor,
+                      ),
                     if (antonymWords.isNotEmpty && showAntonym)
-                      _buildFilterBox(localeString.antonym, antonymWords),
+                      _buildFilterBox(
+                        localeString.antonym,
+                        antonymWords,
+                        filterBoxColor,
+                        textColor,
+                        subtitleTextColor,
+                        iconColor,
+                      ),
                     if (similarWords.isNotEmpty && showSimilar)
-                      _buildFilterBox(localeString.similar_word, similarWords),
+                      _buildFilterBox(
+                        localeString.similar_word,
+                        similarWords,
+                        filterBoxColor,
+                        textColor,
+                        subtitleTextColor,
+                        iconColor,
+                      ),
                   ],
                 ),
                 if (_showOverlay)
                   GestureDetector(
                     onTap: _toggleOverlay,
-                    child: Container(
-                      color: Colors.black.withValues(alpha: 0.4),
-                    ),
+                    child: Container(color: overlayBackgroundColor),
                   ),
                 if (_showOverlay)
                   Center(
@@ -193,7 +248,10 @@ class _RifmaScreenState extends State<RifmaScreen>
                         width: 385,
                         height: 574,
                         decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 227, 153, 237),
+                          color:
+                              isDark
+                                  ? const Color(0xFF61377B)
+                                  : const Color(0xFFE399ED),
                           borderRadius: const BorderRadius.only(
                             bottomLeft: Radius.circular(10),
                             bottomRight: Radius.circular(40),
@@ -217,6 +275,7 @@ class _RifmaScreenState extends State<RifmaScreen>
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
+                                color: textColor,
                               ),
                             ),
                             const SizedBox(height: 20),
@@ -224,32 +283,31 @@ class _RifmaScreenState extends State<RifmaScreen>
                               localeString.similar_word,
                               showSimilar,
                               (val) => setState(() => showSimilar = val!),
+                              textColor,
                             ),
                             _buildCheckboxTile(
                               localeString.rhyme,
                               showRhyme,
                               (val) => setState(() => showRhyme = val!),
+                              textColor,
                             ),
                             _buildCheckboxTile(
                               localeString.synonym,
                               showSynonym,
                               (val) => setState(() => showSynonym = val!),
+                              textColor,
                             ),
                             _buildCheckboxTile(
                               localeString.antonym,
                               showAntonym,
                               (val) => setState(() => showAntonym = val!),
+                              textColor,
                             ),
                             const SizedBox(height: 24),
                             Center(
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color.fromARGB(
-                                    181,
-                                    214,
-                                    58,
-                                    235,
-                                  ),
+                                  backgroundColor: buttonColor,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20),
                                   ),
@@ -259,8 +317,8 @@ class _RifmaScreenState extends State<RifmaScreen>
                                   _toggleOverlay();
                                   _submit(controller.text.trim());
                                 },
-                                child: Text(
-                                  localeString.accept,
+                                child: const Text(
+                                  'Принять',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 20,
@@ -281,7 +339,14 @@ class _RifmaScreenState extends State<RifmaScreen>
     );
   }
 
-  Widget _buildFilterBox(String title, List<dynamic> words) {
+  Widget _buildFilterBox(
+    String title,
+    List<dynamic> words,
+    Color bgColor,
+    Color titleColor,
+    Color? subtitleColor,
+    Color? iconColor,
+  ) {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(
@@ -294,7 +359,7 @@ class _RifmaScreenState extends State<RifmaScreen>
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: bgColor,
           borderRadius: BorderRadius.circular(12),
           boxShadow: const [
             BoxShadow(
@@ -306,16 +371,20 @@ class _RifmaScreenState extends State<RifmaScreen>
         ),
         child: Row(
           children: [
-            const Icon(Icons.label_important_outline, color: Colors.deepPurple),
+            Icon(Icons.label_important_outline, color: iconColor),
             const SizedBox(width: 10),
             Text(
               title,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: titleColor,
+              ),
             ),
             const Spacer(),
             Text(
               "${words.length} слов",
-              style: const TextStyle(color: Colors.grey),
+              style: TextStyle(color: subtitleColor),
             ),
           ],
         ),
@@ -327,11 +396,12 @@ class _RifmaScreenState extends State<RifmaScreen>
     String title,
     bool value,
     ValueChanged<bool?> onChanged,
+    Color textColor,
   ) {
     return CheckboxListTile(
       value: value,
       onChanged: onChanged,
-      title: Text(title),
+      title: Text(title, style: TextStyle(color: textColor)),
       controlAffinity: ListTileControlAffinity.leading,
     );
   }

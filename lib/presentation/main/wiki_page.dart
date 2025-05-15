@@ -24,8 +24,20 @@ class _WikiPageState extends State<WikiPage> {
           listen: false,
         ).locale!.languageCode;
 
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    // Цвета в зависимости от темы
+    final backgroundColor =
+        isDark ? const Color(0xFF1E1E2C) : const Color(0xFFF3EFFF);
+    final inputFillColor =
+        isDark ? const Color(0xFF2E2E3E) : const Color(0xFFE6DDF3);
+    final inputTextColor = isDark ? Colors.white : Colors.black;
+    final boxShadowColor =
+        isDark ? Colors.black.withOpacity(0.6) : Colors.black.withOpacity(0.2);
+    final textColor = isDark ? Colors.white : Colors.black87;
+
     return Scaffold(
-      backgroundColor: const Color(0xffb9a7de),
+      backgroundColor: backgroundColor,
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: GestureDetector(
@@ -34,24 +46,29 @@ class _WikiPageState extends State<WikiPage> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 10.0),
+                padding: const EdgeInsets.only(
+                  left: 10.0,
+                  right: 10.0,
+                  top: 10.0,
+                ),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
+                    color: inputFillColor,
+                    borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(16),
                       bottomLeft: Radius.circular(16),
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.2),
+                        color: boxShadowColor,
                         blurRadius: 8,
-                        offset: Offset(0, 9), // смещение тени
+                        offset: const Offset(0, 6),
                       ),
                     ],
                   ),
                   child: TextField(
                     controller: _controller,
+                    style: TextStyle(color: inputTextColor),
                     onSubmitted: (value) {
                       if (value.isNotEmpty) {
                         context.read<WikiBloc>().add(
@@ -61,20 +78,23 @@ class _WikiPageState extends State<WikiPage> {
                     },
                     decoration: InputDecoration(
                       hintText: localeString.enter_text,
-                      border: OutlineInputBorder(
+                      hintStyle: TextStyle(
+                        color: isDark ? Colors.white54 : Colors.black45,
+                      ),
+                      border: const OutlineInputBorder(
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(16),
                           bottomLeft: Radius.circular(16),
                         ),
                         borderSide: BorderSide.none,
                       ),
-                      contentPadding: EdgeInsets.symmetric(
+                      contentPadding: const EdgeInsets.symmetric(
                         horizontal: 16,
                         vertical: 14,
                       ),
-                      prefixIcon: Icon(Icons.search),
+                      prefixIcon: Icon(Icons.search, color: inputTextColor),
                       filled: true,
-                      fillColor: Color(0xffdfd0f2), // важно для тени
+                      fillColor: inputFillColor,
                     ),
                   ),
                 ),
@@ -94,7 +114,6 @@ class _WikiPageState extends State<WikiPage> {
                             if (state.summary.imageUrl != null)
                               Image.network(
                                 state.summary.imageUrl!,
-
                                 fit: BoxFit.cover,
                               ),
                             Padding(
@@ -103,25 +122,36 @@ class _WikiPageState extends State<WikiPage> {
                               ),
                               child: Text(
                                 state.summary.title,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
+                                  color: textColor,
                                 ),
                                 textAlign: TextAlign.justify,
                               ),
                             ),
                             Text(
                               state.summary.extract,
-                              style: const TextStyle(fontSize: 18),
+                              style: TextStyle(fontSize: 18, color: textColor),
                               textAlign: TextAlign.justify,
                             ),
                           ],
                         ),
                       );
                     } else if (state is WikiError) {
-                      return Center(child: Text(state.errorMsg));
+                      return Center(
+                        child: Text(
+                          state.errorMsg,
+                          style: TextStyle(color: textColor),
+                        ),
+                      );
                     }
-                    return Center(child: Text(localeString.term));
+                    return Center(
+                      child: Text(
+                        localeString.term,
+                        style: TextStyle(color: textColor),
+                      ),
+                    );
                   },
                 ),
               ),

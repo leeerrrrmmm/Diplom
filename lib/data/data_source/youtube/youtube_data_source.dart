@@ -30,7 +30,6 @@ class YoutubeDataSource {
 
     final videos = items.map((item) => YoutubeModel.fromJson(item)).toList();
 
-    // Получаем список videoId для запроса статистики
     final videoIds = videos.map((v) => v.id).toList();
 
     // Запрос статистики видео

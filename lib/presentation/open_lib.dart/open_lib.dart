@@ -31,7 +31,6 @@ class _OpenLibState extends State<OpenLib> with SingleTickerProviderStateMixin {
       }
     });
 
-    // Инициализация анимации
     _controller = AnimationController(
       duration: const Duration(milliseconds: 500),
       vsync: this,
@@ -63,13 +62,26 @@ class _OpenLibState extends State<OpenLib> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final localeString = S.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final backgroundGradient =
+        isDark
+            ? [Colors.black87, Colors.grey.shade900]
+            : [const Color(0xff9a73cb), const Color(0xFFdfd0f2)];
+    final containerColor = isDark ? Colors.grey.shade800 : Colors.white;
+    final searchFillColor =
+        isDark ? Colors.grey.shade700 : const Color(0xffdfd0f2);
+    final bookItemColor =
+        isDark ? Colors.grey.shade700 : const Color(0xffdfd0f2);
+    final overlayColor =
+        isDark ? Colors.grey.shade800 : const Color(0xffcaa7de);
+
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.bottomLeft,
             end: Alignment.topRight,
-            colors: [Color(0xff9a73cb), Color(0xFFdfd0f2)],
+            colors: backgroundGradient,
           ),
         ),
         child: SafeArea(
@@ -79,16 +91,16 @@ class _OpenLibState extends State<OpenLib> with SingleTickerProviderStateMixin {
                 padding: const EdgeInsets.only(left: 12.0, bottom: 20.0),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
+                    color: containerColor,
+                    borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(16),
                       bottomLeft: Radius.circular(16),
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.2),
+                        color: Colors.black.withAlpha(50),
                         blurRadius: 8,
-                        offset: Offset(0, 9), // смещение тени
+                        offset: const Offset(0, 9),
                       ),
                     ],
                   ),
@@ -99,25 +111,24 @@ class _OpenLibState extends State<OpenLib> with SingleTickerProviderStateMixin {
                     },
                     decoration: InputDecoration(
                       hintText: localeString.enter_text,
-                      border: OutlineInputBorder(
+                      border: const OutlineInputBorder(
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(16),
                           bottomLeft: Radius.circular(16),
                         ),
                         borderSide: BorderSide.none,
                       ),
-                      contentPadding: EdgeInsets.symmetric(
+                      contentPadding: const EdgeInsets.symmetric(
                         horizontal: 16,
                         vertical: 14,
                       ),
-                      prefixIcon: Icon(Icons.search),
+                      prefixIcon: const Icon(Icons.search),
                       filled: true,
-                      fillColor: Color(0xffdfd0f2), // важно для тени
+                      fillColor: searchFillColor,
                     ),
                   ),
                 ),
               ),
-              // Иконка для анимации
               Align(
                 alignment: Alignment.topRight,
                 child: GestureDetector(
@@ -129,12 +140,11 @@ class _OpenLibState extends State<OpenLib> with SingleTickerProviderStateMixin {
                 ),
               ),
               const SizedBox(height: 20),
-              // Список книг и другие виджеты
               Expanded(
                 child: BlocBuilder<OpenLibBloc, OpenLibState>(
                   builder: (context, state) {
                     if (state.isLoading && state.books.isEmpty) {
-                      return Center(child: CircularProgressIndicator());
+                      return const Center(child: CircularProgressIndicator());
                     }
                     return ListView.builder(
                       controller: _scrollController,
@@ -156,8 +166,8 @@ class _OpenLibState extends State<OpenLib> with SingleTickerProviderStateMixin {
                             },
                             child: Container(
                               decoration: BoxDecoration(
-                                color: Color(0xffdfd0f2),
-                                borderRadius: BorderRadius.only(
+                                color: bookItemColor,
+                                borderRadius: const BorderRadius.only(
                                   topLeft: Radius.circular(10),
                                   bottomLeft: Radius.circular(10),
                                 ),
@@ -174,7 +184,7 @@ class _OpenLibState extends State<OpenLib> with SingleTickerProviderStateMixin {
                                     width: 120,
                                     height: 188,
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.only(
+                                      borderRadius: const BorderRadius.only(
                                         topLeft: Radius.circular(10),
                                         bottomLeft: Radius.circular(10),
                                       ),
@@ -186,7 +196,7 @@ class _OpenLibState extends State<OpenLib> with SingleTickerProviderStateMixin {
                                                 ),
                                                 fit: BoxFit.cover,
                                               )
-                                              : DecorationImage(
+                                              : const DecorationImage(
                                                 image: AssetImage(
                                                   'assets/flut.png',
                                                 ),
@@ -205,15 +215,15 @@ class _OpenLibState extends State<OpenLib> with SingleTickerProviderStateMixin {
                                           children: [
                                             Text(
                                               book.title,
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 20,
                                               ),
                                             ),
-                                            SizedBox(height: 10),
+                                            const SizedBox(height: 10),
                                             Text(
                                               '${localeString.author}: ${book.author}',
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: 16,
                                               ),
@@ -229,20 +239,19 @@ class _OpenLibState extends State<OpenLib> with SingleTickerProviderStateMixin {
                           );
                         } else {
                           return state.isLoading
-                              ? Padding(
-                                padding: const EdgeInsets.all(8.0),
+                              ? const Padding(
+                                padding: EdgeInsets.all(8.0),
                                 child: Center(
                                   child: CircularProgressIndicator(),
                                 ),
                               )
-                              : SizedBox();
+                              : const SizedBox();
                         }
                       },
                     );
                   },
                 ),
               ),
-              // Here, move the overlay code inside the widget tree
               if (_showOverlay) ...[
                 GestureDetector(
                   onTap: _toggleOverlay,
@@ -259,10 +268,9 @@ class _OpenLibState extends State<OpenLib> with SingleTickerProviderStateMixin {
                       margin: const EdgeInsets.all(34),
                       width: 385,
                       height: 574,
-
                       decoration: BoxDecoration(
-                        color: Color(0xffcaa7de),
-                        borderRadius: BorderRadius.only(
+                        color: overlayColor,
+                        borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(10),
                           bottomRight: Radius.circular(40),
                           topLeft: Radius.circular(40),
@@ -279,7 +287,6 @@ class _OpenLibState extends State<OpenLib> with SingleTickerProviderStateMixin {
                       padding: const EdgeInsets.all(24),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           const Text(
                             'Фильтры',
@@ -291,7 +298,7 @@ class _OpenLibState extends State<OpenLib> with SingleTickerProviderStateMixin {
                           const SizedBox(height: 20),
                           Row(
                             children: [
-                              CircleAvatar(
+                              const CircleAvatar(
                                 radius: 22,
                                 backgroundColor: Color(0xff9b1dba),
                                 child: Icon(
@@ -309,12 +316,10 @@ class _OpenLibState extends State<OpenLib> with SingleTickerProviderStateMixin {
                               ),
                             ],
                           ),
-                          //lan
                           ElevatedButton(
                             onPressed: () => log('En'),
                             child: const Text('En'),
                           ),
-
                           ElevatedButton(
                             onPressed: () => log('Uk'),
                             child: const Text('Uk'),
@@ -324,10 +329,9 @@ class _OpenLibState extends State<OpenLib> with SingleTickerProviderStateMixin {
                             child: const Text('Ru'),
                           ),
                           const SizedBox(height: 24),
-                          // CATEGORY
                           Row(
                             children: [
-                              CircleAvatar(
+                              const CircleAvatar(
                                 radius: 22,
                                 backgroundColor: Color(0xff9b1dba),
                                 child: Icon(
@@ -346,8 +350,9 @@ class _OpenLibState extends State<OpenLib> with SingleTickerProviderStateMixin {
                             ],
                           ),
                           Column(
-                            children: [
-                              Row(
+                            children: List.generate(
+                              3,
+                              (_) => Row(
                                 children: [
                                   ElevatedButton(
                                     onPressed: () => log('Фантастика'),
@@ -359,31 +364,7 @@ class _OpenLibState extends State<OpenLib> with SingleTickerProviderStateMixin {
                                   ),
                                 ],
                               ),
-                              Row(
-                                children: [
-                                  ElevatedButton(
-                                    onPressed: () => log('Фантастика'),
-                                    child: const Text('Фантастика'),
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () => log('Фантастика'),
-                                    child: const Text('Фантастика'),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  ElevatedButton(
-                                    onPressed: () => log('Фантастика'),
-                                    child: const Text('Фантастика'),
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () => log('Фантастика'),
-                                    child: const Text('Фантастика'),
-                                  ),
-                                ],
-                              ),
-                            ],
+                            ),
                           ),
                         ],
                       ),

@@ -1,5 +1,6 @@
 import 'package:diplom/core/components/build_text.dart';
 import 'package:diplom/generated/l10n.dart';
+import 'package:diplom/presentation/detail/youtube/youtube_detail.dart';
 import 'package:diplom/presentation/service/bloc/youtube_bloc/youtube_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,124 +48,142 @@ class _YoutubeState extends State<Youtube> {
     final localString = S.of(context);
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    final backgroundColor = isDark ? Colors.black : Colors.white;
+    final background = isDark ? Colors.black : Colors.white;
     final textColor = isDark ? Colors.white : Colors.black87;
-    final accentColor = isDark ? Colors.black : Colors.red;
+    final containerColor = isDark ? Colors.black : Colors.white;
 
     return Scaffold(
-      backgroundColor: backgroundColor,
-      appBar: AppBar(
-        title: const Text("YouTube"),
-        backgroundColor: accentColor,
-        foregroundColor: Colors.white,
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: TextField(
-              controller: _searchController,
-              onSubmitted: (query) {
-                context.read<YoutubeBloc>().add(SearchResults(query));
-              },
-              decoration: InputDecoration(
-                hintText: localString.enter_text,
-                prefixIcon: const Icon(Icons.search),
-                fillColor: isDark ? Colors.grey[800] : Colors.grey[300],
-                filled: true,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16.0),
-                  borderSide: BorderSide.none,
+      backgroundColor: background,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: TextField(
+                  controller: _searchController,
+                  onSubmitted: (query) {
+                    context.read<YoutubeBloc>().add(SearchResults(query));
+                  },
+                  decoration: InputDecoration(
+                    hintText: localString.enter_text,
+                    prefixIcon: const Icon(Icons.search),
+                    fillColor: isDark ? Colors.grey[800] : Colors.grey[300],
+                    filled: true,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16.0),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                  style: TextStyle(color: textColor),
                 ),
               ),
-              style: TextStyle(color: textColor),
-            ),
-          ),
-          Expanded(
-            child: BlocBuilder<YoutubeBloc, YoutubeState>(
-              builder: (context, state) {
-                if (state.isLoading && state.results.isEmpty) {
-                  return const Center(child: CircularProgressIndicator());
-                }
+              BlocBuilder<YoutubeBloc, YoutubeState>(
+                builder: (context, state) {
+                  if (state.isLoading && state.results.isEmpty) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
 
-                return ListView.builder(
-                  controller: _scrollController,
-                  itemCount: state.results.length + (state.isLoading ? 1 : 0),
-                  itemBuilder: (context, index) {
-                    if (index < state.results.length) {
-                      final res = state.results[index];
-                      return Container(
-                        margin: const EdgeInsets.only(bottom: 10.0),
-                        color: Colors.black,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 10.0),
-                              child: SizedBox(
-                                child: Image.network(
-                                  res.thumbnailUrl,
-                                  fit: BoxFit.contain,
+                  return ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    controller: _scrollController,
+                    itemCount: state.results.length + (state.isLoading ? 1 : 0),
+                    itemBuilder: (context, index) {
+                      if (index < state.results.length) {
+                        final res = state.results[index];
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 10.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (context) =>
+                                          YoutubeVideoPlayer(videoId: res.id),
                                 ),
+                              );
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(color: containerColor),
+                              child: Column(
+                                children: <Widget>[
+                                  Image.network(
+                                    res.thumbnailUrl,
+                                    fit: BoxFit.contain,
+                                  ),
+                                  SizedBox(
+                                    child: Row(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: CircleAvatar(
+                                            radius: 20,
+                                            backgroundImage: NetworkImage(
+                                              res.channelImg,
+                                            ),
+                                          ),
+                                        ),
+                                        Flexible(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              BuildText(
+                                                text: res.title,
+                                                textColor: textColor,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                              Row(
+                                                children: [
+                                                  BuildText(
+                                                    text:
+                                                        ' ${res.channelTitle} ·',
+                                                    textColor:
+                                                        isDark
+                                                            ? Colors.white70
+                                                            : Colors.black87,
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                  BuildText(
+                                                    text:
+                                                        ' ${formatViewCount(res.viewCount)} views',
+                                                    textColor:
+                                                        isDark
+                                                            ? Colors.white70
+                                                            : Colors.black87,
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    CircleAvatar(
-                                      backgroundImage: NetworkImage(
-                                        res.channelImg,
-                                      ),
-                                    ),
-                                    const SizedBox(width: 10),
-                                    Flexible(
-                                      child: BuildText(
-                                        textAlign: TextAlign.center,
-                                        text: res.title,
-                                        textColor: Colors.white,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    BuildText(
-                                      text: ' ${res.channelTitle} ·',
-                                      textColor: Colors.white70,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    BuildText(
-                                      text:
-                                          ' ${formatViewCount(res.viewCount)} views',
-                                      textColor: Colors.white70,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      );
-                    } else {
-                      return const Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Center(child: CircularProgressIndicator()),
-                      );
-                    }
-                  },
-                );
-              },
-            ),
+                          ),
+                        );
+                      } else {
+                        return const Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Center(child: CircularProgressIndicator()),
+                        );
+                      }
+                    },
+                  );
+                },
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

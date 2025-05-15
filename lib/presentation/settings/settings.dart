@@ -22,7 +22,11 @@ class _SettingsState extends State<Settings> {
     final isDark = themeProvider.themeMode == ThemeMode.dark;
 
     return Scaffold(
-      appBar: AppBar(title: Text(localString.settings)),
+      backgroundColor: isDark ? Colors.black : Colors.grey.shade100,
+      appBar: AppBar(
+        title: Text(localString.settings),
+        backgroundColor: isDark ? Colors.black : Colors.grey.shade100,
+      ),
       body: Column(
         children: [
           Padding(

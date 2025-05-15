@@ -20,22 +20,36 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    // Цвета для каждой вкладки по индексу
+    final darkThemeColors = [
+      const Color(0xff601fb4), // Wiki
+      const Color(0xff9b1dba), // Open Library
+      const Color(0xffba1db5), // Open Rima
+      Colors.red, // YouTube
+      Colors.black, // Settings
+    ];
+
+    final lightThemeColors = [
+      const Color(0xffb388ff), // Wiki (светлый фиолетовый)
+      const Color(0xffce93d8), // Open Library (сиреневый)
+      const Color(0xfff48fb1), // Open Rima (розоватый)
+      Colors.redAccent, // YouTube (яркий)
+      Colors.grey, // Settings
+    ];
+
+    final selectedBackgroundColor =
+        isDark ? darkThemeColors[pageIndex] : lightThemeColors[pageIndex];
+
     return Scaffold(
+      backgroundColor: selectedBackgroundColor,
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: true,
-        selectedItemColor:
-            Theme.of(context).brightness == Brightness.dark
-                ? Colors.white
-                : pageIndex == 3
-                ? Colors.white
-                : Colors.black,
-        unselectedItemColor:
-            Theme.of(context).brightness == Brightness.dark
-                ? Colors.white54
-                : pageIndex == 3
-                ? Colors.white
-                : Colors.black26,
         currentIndex: pageIndex,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: isDark ? Colors.white54 : Colors.black26,
+        backgroundColor: selectedBackgroundColor,
         onTap: (value) {
           setState(() {
             pageIndex = value;
@@ -43,29 +57,29 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
         },
         items: [
           BottomNavigationBarItem(
-            backgroundColor: Color(0xff601fb4),
+            backgroundColor: selectedBackgroundColor,
             label: 'Wiki',
-            icon: FaIcon(FontAwesomeIcons.wikipediaW),
+            icon: const FaIcon(FontAwesomeIcons.wikipediaW),
           ),
           BottomNavigationBarItem(
-            backgroundColor: Color(0xff9b1dba),
+            backgroundColor: selectedBackgroundColor,
             label: 'Open Library',
-            icon: Icon(Icons.library_books_outlined),
+            icon: const Icon(Icons.library_books_outlined),
           ),
           BottomNavigationBarItem(
-            backgroundColor: Color(0xffba1db5),
+            backgroundColor: selectedBackgroundColor,
             label: 'Open Rima',
-            icon: Icon(Icons.workspaces_filled),
+            icon: const Icon(Icons.workspaces_filled),
           ),
           BottomNavigationBarItem(
-            backgroundColor: Colors.black,
-            label: 'Youtube',
-            icon: FaIcon(FontAwesomeIcons.youtube),
+            backgroundColor: selectedBackgroundColor,
+            label: 'YouTube',
+            icon: const FaIcon(FontAwesomeIcons.youtube),
           ),
           BottomNavigationBarItem(
-            backgroundColor: Colors.grey,
+            backgroundColor: selectedBackgroundColor,
             label: 'Settings',
-            icon: Icon(Icons.settings_outlined),
+            icon: const Icon(Icons.settings_outlined),
           ),
         ],
       ),
