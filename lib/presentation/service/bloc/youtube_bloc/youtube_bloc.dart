@@ -23,14 +23,14 @@ class YoutubeBloc extends Bloc<YoutubeEvent, YoutubeState> {
     emit(state.copyWith(isLoading: true));
     try {
       final (results, nextPageToken) = await youtubeUseCases(
-        query: "dart", // default query
+        query: "Flutter programming", // default query
         maxResults: limit,
       );
       emit(
         state.copyWith(
           results: results,
           isLoading: false,
-          query: "dart",
+          query: "",
           hasReachedEnd: false,
           nextPageToken: nextPageToken,
         ),

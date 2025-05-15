@@ -26,10 +26,14 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
         selectedItemColor:
             Theme.of(context).brightness == Brightness.dark
                 ? Colors.white
+                : pageIndex == 3
+                ? Colors.white
                 : Colors.black,
         unselectedItemColor:
             Theme.of(context).brightness == Brightness.dark
                 ? Colors.white54
+                : pageIndex == 3
+                ? Colors.white
                 : Colors.black26,
         currentIndex: pageIndex,
         onTap: (value) {
@@ -54,10 +58,12 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
             icon: Icon(Icons.workspaces_filled),
           ),
           BottomNavigationBarItem(
+            backgroundColor: Colors.black,
             label: 'Youtube',
             icon: FaIcon(FontAwesomeIcons.youtube),
           ),
           BottomNavigationBarItem(
+            backgroundColor: Colors.grey,
             label: 'Settings',
             icon: Icon(Icons.settings_outlined),
           ),
