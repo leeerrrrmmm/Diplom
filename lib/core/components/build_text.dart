@@ -7,16 +7,19 @@ class BuildText extends StatelessWidget {
     required this.fontSize,
     required this.fontWeight,
     required this.textColor,
+    this.textAlign,
   });
 
   final String text;
   final double fontSize;
   final Color textColor;
   final FontWeight fontWeight;
+  final TextAlign? textAlign;
 
   @override
   Widget build(BuildContext context) {
     return Text(
+      textAlign: textAlign,
       text,
       style: TextStyle(
         color: textColor,

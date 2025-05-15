@@ -1,5 +1,4 @@
 import 'package:diplom/core/components/build_text.dart';
-import 'package:diplom/domain/entity/youtube/youtube_entity.dart';
 import 'package:diplom/generated/l10n.dart';
 import 'package:diplom/presentation/service/bloc/youtube_bloc/youtube_bloc.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +26,20 @@ class _YoutubeState extends State<Youtube> {
         context.read<YoutubeBloc>().add(LoadMoreResults());
       }
     });
+  }
+
+  String formatViewCount(String viewCount) {
+    final int count = int.tryParse(viewCount) ?? 0;
+
+    if (count >= 1000000000) {
+      return '${(count / 1000000000).toStringAsFixed(1)}B';
+    } else if (count >= 1000000) {
+      return '${(count / 1000000).toStringAsFixed(1)}M';
+    } else if (count >= 1000) {
+      return '${(count / 1000).toStringAsFixed(1)}K';
+    } else {
+      return count.toString();
+    }
   }
 
   @override
@@ -82,7 +95,7 @@ class _YoutubeState extends State<Youtube> {
                       final res = state.results[index];
                       return Container(
                         margin: const EdgeInsets.only(bottom: 10.0),
-                        color: Colors.red,
+                        color: Colors.black,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -97,16 +110,38 @@ class _YoutubeState extends State<Youtube> {
                             ),
                             Column(
                               children: [
-                                BuildText(
-                                  text: res.title,
-                                  textColor: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    CircleAvatar(
+                                      backgroundImage: NetworkImage(
+                                        res.channelImg,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 10),
+                                    Flexible(
+                                      child: BuildText(
+                                        textAlign: TextAlign.center,
+                                        text: res.title,
+                                        textColor: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     BuildText(
-                                      text: res.channelTitle,
+                                      text: ' ${res.channelTitle} ·',
+                                      textColor: Colors.white70,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                    BuildText(
+                                      text:
+                                          ' ${formatViewCount(res.viewCount)} views',
                                       textColor: Colors.white70,
                                       fontSize: 12,
                                       fontWeight: FontWeight.w500,
