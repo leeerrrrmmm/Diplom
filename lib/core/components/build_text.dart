@@ -6,13 +6,13 @@ class BuildText extends StatelessWidget {
     required this.text,
     required this.fontSize,
     required this.fontWeight,
-    required this.textColor,
+    this.textColor,
     this.textAlign,
   });
 
   final String text;
   final double fontSize;
-  final Color textColor;
+  final Color? textColor;
   final FontWeight fontWeight;
   final TextAlign? textAlign;
 
