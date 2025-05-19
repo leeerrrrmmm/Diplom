@@ -13,18 +13,22 @@ import 'package:diplom/domain/usecases/data_muse/data_muse_use_cases.dart';
 import 'package:diplom/domain/usecases/open_lib_use_cases/open_lib_user_cases.dart';
 import 'package:diplom/domain/usecases/wiki/wiki_uses_case.dart';
 import 'package:diplom/domain/usecases/youtube/youtube_use_cases.dart';
+import 'package:diplom/firebase_options.dart';
 import 'package:diplom/presentation/app.dart';
 import 'package:diplom/presentation/service/bloc/data_muse_bloc/data_muse_bloc.dart';
 import 'package:diplom/presentation/service/bloc/open_lib_bloc/open_lib_bloc.dart';
 import 'package:diplom/presentation/service/bloc/wiki_bloc/wiki_bloc.dart';
 import 'package:diplom/presentation/service/bloc/youtube_bloc/youtube_bloc.dart';
 import 'package:diplom/presentation/service/common/lang/locale_provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await dotenv.load();
   // wiki
   final remoteDataSource = WikiRemoteDataSource();

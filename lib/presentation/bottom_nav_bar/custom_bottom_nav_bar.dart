@@ -1,7 +1,7 @@
 import 'package:diplom/presentation/main/wiki_page.dart';
 import 'package:diplom/presentation/open_lib.dart/open_lib.dart';
+import 'package:diplom/presentation/profile/profile_screen.dart';
 import 'package:diplom/presentation/rifma_screen/rifma_screen.dart';
-import 'package:diplom/presentation/settings/settings.dart';
 import 'package:diplom/presentation/youtube/youtube_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -14,9 +14,15 @@ class CustomBottomNavBar extends StatefulWidget {
 }
 
 class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
-  int pageIndex = 0;
+  int pageIndex = 4;
 
-  final pages = [WikiPage(), OpenLib(), RifmaScreen(), Youtube(), Settings()];
+  final pages = [
+    WikiPage(),
+    OpenLib(),
+    RifmaScreen(),
+    Youtube(),
+    ProfileScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +42,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
       const Color(0xffce93d8), // Open Library (сиреневый)
       const Color(0xfff48fb1), // Open Rima (розоватый)
       Colors.redAccent, // YouTube (яркий)
-      Colors.grey, // Settings
+      const Color.fromARGB(255, 235, 228, 228), // Settings
     ];
 
     final selectedBackgroundColor =

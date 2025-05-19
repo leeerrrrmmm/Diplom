@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart' as http;
-import 'package:diplom/data/models/lib/open_lib_model.dart';
+import 'package:diplom/data/models/open_lib/open_lib_model.dart';
 
 class RemoteLibDataSource {
   final _baseurl = 'https://openlibrary.org/search.json';

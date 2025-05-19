@@ -1,4 +1,4 @@
-import 'package:diplom/domain/entity/lib/open_lib.dart';
+import 'package:diplom/domain/entity/open_lib/open_lib.dart';
 import 'package:diplom/generated/l10n.dart';
 import 'package:diplom/presentation/service/bloc/open_lib_bloc/open_lib_bloc.dart';
 import 'package:flutter/material.dart';

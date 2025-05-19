@@ -1,6 +1,6 @@
 import 'package:diplom/data/local/theme/theme_storage.dart';
+import 'package:diplom/domain/auth/gate/auth_gate.dart';
 import 'package:diplom/generated/l10n.dart';
-import 'package:diplom/presentation/first/first_screen.dart';
 import 'package:diplom/presentation/service/common/lang/locale_provider.dart';
 import 'package:diplom/presentation/service/common/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +68,7 @@ class _AppState extends State<App> {
             theme: ThemeData.light(),
             darkTheme: ThemeData.dark(),
             themeMode: mode,
-            home: FirstScreen(),
+            home: AuthGate(),
           );
         },
       ),

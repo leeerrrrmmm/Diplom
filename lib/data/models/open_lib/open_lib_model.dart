@@ -1,4 +1,4 @@
-import 'package:diplom/domain/entity/lib/open_lib.dart';
+import 'package:diplom/domain/entity/open_lib/open_lib.dart';
 
 class OpenLibModel extends OpenLibEntity {
   OpenLibModel({

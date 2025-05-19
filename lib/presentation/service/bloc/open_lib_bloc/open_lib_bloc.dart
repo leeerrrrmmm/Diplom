@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:diplom/domain/entity/lib/open_lib.dart';
+import 'package:diplom/domain/entity/open_lib/open_lib.dart';
 import 'package:diplom/domain/usecases/open_lib_use_cases/open_lib_user_cases.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
