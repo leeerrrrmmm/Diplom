@@ -38,9 +38,9 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
     ];
 
     final lightThemeColors = [
-      const Color(0xffb388ff), // Wiki (светлый фиолетовый)
-      const Color(0xffce93d8), // Open Library (сиреневый)
-      const Color(0xfff48fb1), // Open Rima (розоватый)
+      const Color(0xffb388ff), // Wiki
+      const Color(0xffce93d8), // Open Library
+      const Color(0xfff48fb1), // Open Rima
       Colors.redAccent, // YouTube (яркий)
       const Color.fromARGB(255, 235, 228, 228), // Settings
     ];
