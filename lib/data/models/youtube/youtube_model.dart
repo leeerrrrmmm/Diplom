@@ -35,14 +35,14 @@ class YoutubeModel extends YoutubeVideoEntity {
       thumbnailUrl: highThumb,
       channelTitle: snippet['channelTitle'] ?? '',
       channelId: snippet['channelId'] ?? '',
-      channelImg: '', // пока пусто, заполнится позже
+      channelImg: '', // поки що пусто, заповніться потім
       publishedAt: snippet['publishedAt'] ?? '',
       videoUrl: videoUrl,
-      viewCount: '0', // пока 0, добавим потом
+      viewCount: '0', // поки 0, додається потім
     );
   }
 
-  // Обновление модели с дополнительными данными: иконка канала и просмотры
+  // Оновлення моделі з додатковими данними: Іконка каналу та перегляди
   YoutubeModel copyWith({String? channelImg, String? viewCount}) {
     return YoutubeModel(
       id: id,

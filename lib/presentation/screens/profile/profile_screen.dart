@@ -1,8 +1,8 @@
 import 'package:diplom/core/components/build_text.dart';
 import 'package:diplom/domain/auth/auth_service.dart';
-import 'package:diplom/presentation/first/first_screen.dart';
-import 'package:diplom/presentation/login/login_screen.dart';
-import 'package:diplom/presentation/settings/settings.dart';
+import 'package:diplom/presentation/screens/first/first_screen.dart';
+import 'package:diplom/presentation/screens/login/login_screen.dart';
+import 'package:diplom/presentation/screens/settings/settings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

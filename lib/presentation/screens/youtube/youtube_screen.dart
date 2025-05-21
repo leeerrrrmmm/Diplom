@@ -1,6 +1,6 @@
 import 'package:diplom/core/components/build_text.dart';
 import 'package:diplom/generated/l10n.dart';
-import 'package:diplom/presentation/detail/youtube/youtube_detail.dart';
+import 'package:diplom/presentation/screens/detail/youtube/youtube_detail.dart';
 import 'package:diplom/presentation/service/bloc/youtube_bloc/youtube_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

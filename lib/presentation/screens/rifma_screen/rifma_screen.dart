@@ -1,5 +1,5 @@
 import 'package:diplom/generated/l10n.dart';
-import 'package:diplom/presentation/detail/rhyme_detail/rhyme_detail.dart';
+import 'package:diplom/presentation/screens/detail/rhyme_detail/rhyme_detail.dart';
 import 'package:diplom/presentation/service/bloc/data_muse_bloc/data_muse_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

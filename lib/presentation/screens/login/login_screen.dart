@@ -3,8 +3,8 @@ import 'package:diplom/core/components/build_button.dart';
 import 'package:diplom/core/components/build_button_with_icon.dart';
 import 'package:diplom/core/components/build_text.dart';
 import 'package:diplom/domain/auth/auth_service.dart';
-import 'package:diplom/presentation/bottom_nav_bar/custom_bottom_nav_bar.dart';
-import 'package:diplom/presentation/register/register_screen.dart';
+import 'package:diplom/presentation/screens/bottom_nav_bar/custom_bottom_nav_bar.dart';
+import 'package:diplom/presentation/screens/register/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -105,6 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       // CONTINUE WITH FACEBOOK AND GOOGLE
                       Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           //CONTINUE WITH FACEBOOK
                           Padding(

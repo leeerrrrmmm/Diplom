@@ -2,7 +2,7 @@ import 'package:diplom/generated/l10n.dart';
 import 'package:diplom/presentation/service/common/lang/locale_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../service/common/theme/theme_provider.dart';
+import '../../service/common/theme/theme_provider.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -135,7 +135,6 @@ Widget _buildLanguageTile({
           underline: const SizedBox(),
           items: const [
             DropdownMenuItem(value: 'en', child: Text('English')),
-            DropdownMenuItem(value: 'ru', child: Text('Русский')),
             DropdownMenuItem(value: 'uk', child: Text('Українська')),
           ],
           onChanged: (value) {

@@ -4,7 +4,7 @@ import 'package:diplom/core/components/build_button.dart';
 import 'package:diplom/core/components/build_button_with_icon.dart';
 import 'package:diplom/core/components/build_text.dart';
 import 'package:diplom/domain/auth/auth_service.dart';
-import 'package:diplom/presentation/bottom_nav_bar/custom_bottom_nav_bar.dart';
+import 'package:diplom/presentation/screens/bottom_nav_bar/custom_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -111,7 +111,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       BuildText(
-                        text: 'Welcome Back!',
+                        text: 'Create your account!',
                         fontSize: 26,
                         fontWeight: FontWeight.bold,
                       ),
@@ -136,9 +136,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Padding(
                         padding: const EdgeInsets.only(top: 40.0, bottom: 40.0),
                         child: BuildButtonWithIconOrImage(
-                          onTap: () {
-                            _registerWithGoogle();
-                          },
+                          onTap: _registerWithGoogle,
                           faIcons: FontAwesomeIcons.google,
                           iconColor: const Color.fromARGB(255, 228, 209, 36),
                           btnColor: Colors.transparent,

@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:diplom/generated/l10n.dart';
-import 'package:diplom/presentation/detail/open_lib/open_lib_deetail.dart';
+import 'package:diplom/presentation/screens/detail/open_lib/open_lib_deetail.dart';
 import 'package:diplom/presentation/service/bloc/open_lib_bloc/open_lib_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -129,16 +129,16 @@ class _OpenLibState extends State<OpenLib> with SingleTickerProviderStateMixin {
                   ),
                 ),
               ),
-              Align(
-                alignment: Alignment.topRight,
-                child: GestureDetector(
-                  onTap: _toggleOverlay,
-                  child: const CircleAvatar(
-                    radius: 24,
-                    child: Icon(Icons.category_rounded),
-                  ),
-                ),
-              ),
+              // Align(
+              //   alignment: Alignment.topRight,
+              //   child: GestureDetector(
+              //     onTap: _toggleOverlay,
+              //     child: const CircleAvatar(
+              //       radius: 24,
+              //       child: Icon(Icons.category_rounded),
+              //     ),
+              //   ),
+              // ),
               const SizedBox(height: 20),
               Expanded(
                 child: BlocBuilder<OpenLibBloc, OpenLibState>(

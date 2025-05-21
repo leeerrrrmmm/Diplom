@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:diplom/presentation/bottom_nav_bar/custom_bottom_nav_bar.dart';
-import 'package:diplom/presentation/first/first_screen.dart';
-import 'package:diplom/presentation/login/login_screen.dart';
-import 'package:diplom/presentation/register/register_screen.dart';
+import 'package:diplom/presentation/screens/bottom_nav_bar/custom_bottom_nav_bar.dart';
+import 'package:diplom/presentation/screens/first/first_screen.dart';
+import 'package:diplom/presentation/screens/login/login_screen.dart';
+import 'package:diplom/presentation/screens/register/register_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';

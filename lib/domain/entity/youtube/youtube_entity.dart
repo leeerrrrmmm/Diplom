@@ -1,5 +1,3 @@
-// lib/domain/entities/youtube_video_entity.dart
-
 class YoutubeVideoEntity {
   final String id;
   final String title;
@@ -7,7 +5,7 @@ class YoutubeVideoEntity {
   final String thumbnailUrl;
   final String channelTitle;
   final String channelId;
-  final String channelImg; // Ссылка на иконку канала
+  final String channelImg;
   final String publishedAt;
   final String videoUrl;
   final String viewCount;
